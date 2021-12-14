@@ -37,7 +37,6 @@ int reloadSideChannel() {
         time1 = __rdtscp(&junk);
         junk = *addr;
         time2 = __rdtscp(&junk) - time1;
-        printf("%d ", (int)time2);
         if (time2 <= CACHE_HIT_THRESHOLD) {
             printf("array[%d*4096 + %d] is in cache.\n", i, DELTA);
             printf("The Secret = %d.\n", i);
