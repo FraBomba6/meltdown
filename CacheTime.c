@@ -38,18 +38,17 @@ int main(int argc, const char **argv) {
     int repetition;
 
     if (argc == 2)
-        repetition = atoi(argv[1]);
+        repetition = (((atoi(argv[1])) < (90)) ? (atoi(argv[1])) : (90));
     else
         repetition = 10;
 
     for (int i = 0; i < repetition; i++) {
-        printf("##### Repetition n° %d #####\n", i);
+        printf("##### Repetition n° %d #####\n", i + 1);
         getCacheTimes(i);
         printf("\n");
     }
 
     printf("##### Summary after %d repetitions #####\n", repetition);
-    int max_time = 0;
     for (int i = 0; i < 10; i++) {
         int sum = 0;
         for (int j = 0; j < repetition; j++) {
