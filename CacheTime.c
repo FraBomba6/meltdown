@@ -37,7 +37,7 @@ int main(int argc, const char **argv) {
     int repetition;
 
     if(argc == 2)
-        repetition = (int) argv[1];
+        repetition = atoi(argv[1]);
     else
         repetition = 10;
 
@@ -47,7 +47,7 @@ int main(int argc, const char **argv) {
         printf("\n");
     }
 
-    printf("##### Summary after %d repetitions #####", repetition);
+    printf("##### Summary after %d repetitions #####\n", repetition);
     for(int i=0; i<10; i++){
         int sum = 0;
         for(int j=0; j<repetition; j++){
