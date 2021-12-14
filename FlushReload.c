@@ -43,6 +43,7 @@ int reloadSideChannel() {
             return i;
         }
     }
+    return -1;
 }
 
 int main(int argc, const char **argv) {
@@ -58,13 +59,16 @@ int main(int argc, const char **argv) {
     int accuracy = 0;
 
     for (int i = 0; i < repetition; i++) {
+        printf("##### Try n° %d #####\n", i + 1);
         flushSideChannel();
         victim();
         int guess = reloadSideChannel();
         if (guess == secret)
             accuracy++;
+        else
+            printf("Failed to retrieve the correct secret index\n")
     }
 
-    printf("\nAccuracy: %.2f\n", accuracy/(double)repetition);
+    printf("\n***** Accuracy: %.2f *****\n\n", accuracy/(double)repetition);
     return 0;
 }
