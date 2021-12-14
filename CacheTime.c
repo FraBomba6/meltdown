@@ -5,7 +5,6 @@
 #include <x86intrin.h>
 
 int times[10][10];
-FILE **ptr;
 
 void getCacheTimes(int cycle) {
     uint8_t array[10*4096];
@@ -37,8 +36,6 @@ void getCacheTimes(int cycle) {
 int main(int argc, const char **argv) {
     int repetition;
 
-    fopen_s(ptr, "hit_treshold", "w");
-
     if(argc == 2)
         repetition = atoi(argv[1]);
     else
@@ -51,16 +48,16 @@ int main(int argc, const char **argv) {
     }
 
     printf("##### Summary after %d repetitions #####\n", repetition);
-    int max = 0;
+    int max_time = 0;
     for(int i=0; i<10; i++){
         int sum = 0;
         for(int j=0; j<repetition; j++){
             sum += times[j][i];
             if(i == 3 || i == 7){
-                max = max(max, times[j][i]);
+                max_time = max(max_time, times[j][i]);
             }
         }
         printf("Mean access time for array[%d*4096]: %d CPU cycles\n",i, (int)sum/repetition);
     }
-    printf("\n!!!!! In FlushReload script you should pass the argument %d !!!!!", max);
+    printf("\n!!!!! In FlushReload script you should pass the argument %d !!!!!", max_time);
 }
