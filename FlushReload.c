@@ -66,7 +66,7 @@ int main(int argc, const char **argv) {
         if (guess == secret)
             accuracy++;
         else
-            printf("Failed to retrieve the correct secret index\n")
+            printf("Failed to retrieve the correct secret index\n");
     }
 
     printf("\n***** Accuracy: %.2f *****\n\n", accuracy/(double)repetition);
