@@ -42,6 +42,6 @@ int main(int argc, const char **argv) {
         for(int j=0; j<10; j++){
             sum += times[j][i];
         }
-        printf("Mean access time for array[%d*4096] after 10 repetitions: %d CPU cycles\n",i, (int)sum/10));
+        printf("Mean access time for array[%d*4096] after 10 repetitions: %d CPU cycles\n",i, (int)sum/10);
     }
 }
