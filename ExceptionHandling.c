@@ -13,7 +13,7 @@ static void catch_segv()
 int main()
 { 
   // The address of our secret data
-  unsigned long kernel_data_addr = 0xfb61b000;
+  unsigned long kernel_data_addr = 0xf9c91000;
 
   // Register a signal handler
   signal(SIGSEGV, catch_segv);                     
