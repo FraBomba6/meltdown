@@ -4,7 +4,7 @@
 #include <emmintrin.h>
 #include <x86intrin.h>
 
-int times[10][10]
+int times[10][10];
 
 void getCacheTimes(int cycle) {
     uint8_t array[10*4096];
@@ -29,19 +29,19 @@ void getCacheTimes(int cycle) {
         junk = *addr;
         time2 = __rdtscp(&junk) - time1;
         printf("Access time for array[%d*4096]: %d CPU cycles\n",i, (int)time2);
-        times[cycle][i] = (int)time2
+        times[cycle][i] = (int)time2;
     }
 }
 
 int main(int argc, const char **argv) {
     for(int i=0; i<10; i++)
-        getCacheTimes(i)
+        getCacheTimes(i);
 
     for(int i=0; i<10; i++){
-        sum = 0;
+        int sum = 0;
         for(int j=0; j<10; j++){
-            sum += times[j][i]
+            sum += times[j][i];
         }
-        printf("Mean access time for array[%d*4096] after 10 repetitions: %d CPU cycles\n",i, (int)sum/10))
+        printf("Mean access time for array[%d*4096] after 10 repetitions: %d CPU cycles\n",i, (int)sum/10));
     }
 }
