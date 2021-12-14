@@ -11,6 +11,8 @@ char secret = 94;
 int CACHE_HIT_THRESHOLD;
 #define DELTA 1024
 
+int repetition;
+
 void flushSideChannel() {
     int i;
 
@@ -25,7 +27,7 @@ void victim() {
     temp = array[secret * 4096 + DELTA];
 }
 
-void reloadSideChannel() {
+int reloadSideChannel() {
     int junk = 0;
     register uint64_t time1, time2;
     volatile uint8_t *addr;
@@ -38,17 +40,31 @@ void reloadSideChannel() {
         if (time2 <= CACHE_HIT_THRESHOLD) {
             printf("array[%d*4096 + %d] is in cache.\n", i, DELTA);
             printf("The Secret = %d.\n", i);
+            return i;
         }
     }
 }
 
 int main(int argc, const char **argv) {
-    if (argc == 2)
+    if (argc >= 2 && argc <= 3)
         CACHE_HIT_THRESHOLD = atoi(argv[1]);
-    else
+    else if (argc == 3)
+        repetition = atoi(argv[2]);
+    else {
         CACHE_HIT_THRESHOLD = 80;
-    flushSideChannel();
-    victim();
-    reloadSideChannel();
-    return (0);
+        repetition = 20;
+    }
+
+    int accuracy = 0;
+
+    for (int i = 0; i < repetition; i++) {
+        flushSideChannel();
+        victim();
+        int guess = reloadSideChannel();
+        if (guess == secret)
+            accuracy++;
+    }
+
+    printf("\nAccuracy: %.2f\n", accuracy/(double)repetition);
+    return 0;
 }

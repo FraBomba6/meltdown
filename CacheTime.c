@@ -60,4 +60,6 @@ int main(int argc, const char **argv) {
         printf("Mean access time for array[%d*4096]: %d CPU cycles\n", i, (int) sum / repetition);
     }
     printf("\n!!!!! In FlushReload script you should pass the argument %d !!!!!\n", max_time);
+
+    return 0;
 }
