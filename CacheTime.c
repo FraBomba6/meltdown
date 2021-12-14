@@ -34,14 +34,25 @@ void getCacheTimes(int cycle) {
 }
 
 int main(int argc, const char **argv) {
-    for(int i=0; i<10; i++)
-        getCacheTimes(i);
+    int repetition;
 
+    if(argc == 2)
+        repetition = (int) argv[1];
+    else
+        repetition = 10;
+
+    for(int i=0; i<repetition; i++) {
+        printf("##### Repetition n° %d #####\n", i);
+        getCacheTimes(i);
+        printf("\n");
+    }
+
+    printf("##### Summary after %d repetitions #####", repetition);
     for(int i=0; i<10; i++){
         int sum = 0;
-        for(int j=0; j<10; j++){
+        for(int j=0; j<repetition; j++){
             sum += times[j][i];
         }
-        printf("Mean access time for array[%d*4096] after 10 repetitions: %d CPU cycles\n",i, (int)sum/10);
+        printf("Mean access time for array[%d*4096]: %d CPU cycles\n",i, (int)sum/repetition);
     }
 }
