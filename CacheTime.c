@@ -54,7 +54,7 @@ int main(int argc, const char **argv) {
         for(int j=0; j<repetition; j++){
             sum += times[j][i];
             if(i == 3 || i == 7){
-                max_time = max(max_time, times[j][i]);
+                max_time = (((max_time) > (times[j][i])) ? (max_time) : (times[j][i]));
             }
         }
         printf("Mean access time for array[%d*4096]: %d CPU cycles\n",i, (int)sum/repetition);
