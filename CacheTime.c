@@ -5,6 +5,7 @@
 #include <x86intrin.h>
 
 int times[10][10];
+int candidates[10];
 
 void getCacheTimes(int cycle) {
     uint8_t array[10 * 4096];
@@ -53,13 +54,11 @@ int main(int argc, const char **argv) {
         int sum = 0;
         for (int j = 0; j < repetition; j++) {
             sum += times[j][i];
-            if (i == 3 || i == 7) {
-                max_time = (((max_time) > (times[j][i])) ? (max_time) : (times[j][i]));
-            }
         }
         printf("Mean access time for array[%d*4096]: %d CPU cycles\n", i, (int) sum / repetition);
+        candidates[i] = (int) sum / repetition;
     }
-    printf("\n!!!!! In FlushReload script you should pass the argument %d !!!!!\n", max_time);
+    printf("\n!!!!! In FlushReload script you should pass the argument %d !!!!!\n", (int)candidates[4]/2);
 
     return 0;
 }
